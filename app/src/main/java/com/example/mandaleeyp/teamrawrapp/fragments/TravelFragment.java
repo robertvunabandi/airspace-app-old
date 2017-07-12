@@ -4,63 +4,71 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.example.mandaleeyp.teamrawrapp.Flight;
 import com.example.mandaleeyp.teamrawrapp.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import cz.msebera.android.httpclient.Header;
+
 public class TravelFragment extends Fragment {
 
-    ImageButton btnDate;
-    int TO_CODE = 0;
+    // base URL for API
+    public final static String API_BASE_URL = "https://api.flightstats.com/flex/schedules/rest";
+    // parameter name for API key
+    public final static String APP_KEY_PARAM = "appKey";
+    public final static String APP_ID_PARAM = "appId";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private int flightYear;
+    private int flightMonth;
+    private int flightDay;
+    private String airlineCode;
+    Button btnSubmit;
+    int FROM_CODE = 0;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    // instance fields
+    AsyncHttpClient client;
 
-//    private OnFragmentInteractionListener mListener;
 
     public TravelFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TravelFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static TravelFragment newInstance(String param1, String param2) {
         TravelFragment fragment = new TravelFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        client = new AsyncHttpClient();
+
+//        getFlight();
+
     }
 
     @Override
@@ -70,6 +78,10 @@ public class TravelFragment extends Fragment {
         TextInputLayout airlinecodeWrapper = (TextInputLayout) v.findViewById(R.id.airlinecodeWrapper);
         TextInputLayout flightnumberWrapper = (TextInputLayout) v.findViewById(R.id.flightnumberWrapper);
         TextInputLayout dateWrapper = (TextInputLayout) v.findViewById(R.id.dateWrapper);
+        btnSubmit = (Button) v.findViewById(R.id.bt_submit);
+        final EditText airlineCode = (EditText) v.findViewById(R.id.til_airlineCode);
+        final EditText flightNumber = (EditText) v.findViewById(R.id.til_flightNumber);
+
         airlinecodeWrapper.setHint("Airline code");
         flightnumberWrapper.setHint("Flight number");
         dateWrapper.setHint("Date of departure");
@@ -88,9 +100,14 @@ public class TravelFragment extends Fragment {
                 String myFormat = "MM/dd/yy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 et_date.setText(sdf.format(myCalendar.getTime()));
+
+                flightYear = year;
+                flightMonth = monthOfYear;
+                flightDay = dayOfMonth;
             }
         };
 
+        // onClickListener for date
         et_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,14 +118,60 @@ public class TravelFragment extends Fragment {
             }
         });
 
+        // onClickListener for submit button
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent i = new Intent(getContext(), AirportSearchActivity.class);
+//                i.putExtra("placeholder", "Submit");
+//                startActivityForResult(i, FROM_CODE);
+
+                //create URL
+                String url = API_BASE_URL + "/v1/json/flight/" + airlineCode.getText() + "/" + flightNumber.getText() + "/departing/" + flightYear + "/" + flightMonth + "/" + flightDay;
+                Log.e("TravelFragment", url);
+                // set request parameters
+                RequestParams params = new RequestParams();
+                params.put(APP_KEY_PARAM, getString(R.string.api_key)); // API key, always required
+                params.put(APP_ID_PARAM, getString(R.string.app_id)); // AppId
+
+
+                //execute a GET request expecting a JSON object response
+                client.get(url, params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Flight flight = Flight.fromJSON(response);
+                            processResponse(response);
+                        } catch (JSONException e) {
+                            Toast.makeText(getContext(), String.format("WOW"), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        Toast.makeText(getContext(), String.format("error 1 %s", errorResponse, toString()), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                        Toast.makeText(getContext(), String.format("error 2 %s", errorResponse, toString()), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(getContext(), String.format("error 3 %s", responseString), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
         return v;
     }
 
-    /*private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        et_date.setText(sdf.format(myCalendar.getTime()));
-    }*/
+    public void processResponse(JSONObject response) {
+        Toast.makeText(getContext(), String.format("%s", response.toString()), Toast.LENGTH_SHORT).show();
+    }
 
 }
 
@@ -163,5 +226,18 @@ public interface OnFragmentInteractionListener {
 //            }
 //        });
 //
+
+//    int TO_CODE = 0;
+//
+//    // TODO: Rename parameter arguments, choose names that match
+//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+//    private static final String ARG_PARAM1 = "param1";
+//    private static final String ARG_PARAM2 = "param2";
+//
+//    // TODO: Rename and change types of parameters
+//    private String mParam1;
+//    private String mParam2;
+
+//    private OnFragmentInteractionListener mListener;
 
 */
