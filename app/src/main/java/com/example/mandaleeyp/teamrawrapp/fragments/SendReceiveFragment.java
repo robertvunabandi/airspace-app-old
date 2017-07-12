@@ -1,14 +1,18 @@
 package com.example.mandaleeyp.teamrawrapp.fragments;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+
+import com.example.mandaleeyp.teamrawrapp.AirportSearchActivity;
 import com.example.mandaleeyp.teamrawrapp.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +31,11 @@ public class SendReceiveFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button btnTo;
+    Button btnFrom;
+    int TO_CODE = 0;
+    int FROM_CODE = 0;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -55,20 +64,62 @@ public class SendReceiveFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_send_receive, container, false);
+        View v = inflater.inflate(R.layout.fragment_send_receive, container, false);
+
+        btnTo = (Button) v.findViewById(R.id.bt_to);
+        btnFrom = (Button) v.findViewById(R.id.bt_from);
+
+        btnTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), AirportSearchActivity.class);
+                i.putExtra("placeholder", "To where");
+                startActivityForResult(i, TO_CODE);
+            }
+        });
+
+        btnFrom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), AirportSearchActivity.class);
+                i.putExtra("placeholder", "From");
+                startActivityForResult(i, FROM_CODE);
+            }
+        });
+
+        return v;
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
     // TODO: Rename method, update argument and hook method into UI event

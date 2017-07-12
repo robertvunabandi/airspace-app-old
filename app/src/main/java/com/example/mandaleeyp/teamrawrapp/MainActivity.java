@@ -27,5 +27,6 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_android);
+
     }
 }
