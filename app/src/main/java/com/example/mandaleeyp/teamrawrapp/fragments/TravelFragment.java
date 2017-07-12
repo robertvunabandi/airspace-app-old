@@ -1,24 +1,27 @@
 package com.example.mandaleeyp.teamrawrapp.fragments;
 
-import android.content.Context;
-import android.net.Uri;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.mandaleeyp.teamrawrapp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TravelFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TravelFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class TravelFragment extends Fragment {
+
+    ImageButton btnDate;
+    int TO_CODE = 0;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -51,7 +54,6 @@ public class TravelFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,11 +64,52 @@ public class TravelFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_travel, container, false);
+        View v = inflater.inflate(R.layout.fragment_travel, container, false);
+        TextInputLayout airlinecodeWrapper = (TextInputLayout) v.findViewById(R.id.airlinecodeWrapper);
+        TextInputLayout flightnumberWrapper = (TextInputLayout) v.findViewById(R.id.flightnumberWrapper);
+        TextInputLayout dateWrapper = (TextInputLayout) v.findViewById(R.id.dateWrapper);
+        airlinecodeWrapper.setHint("Airline code");
+        flightnumberWrapper.setHint("Flight number");
+        dateWrapper.setHint("Date of departure");
+
+        final EditText et_date = (EditText) v.findViewById(R.id.et_date);
+        final Calendar myCalendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                // updateLabel();
+                String myFormat = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                et_date.setText(sdf.format(myCalendar.getTime()));
+            }
+        };
+
+        et_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        return v;
     }
+
+    /*private void updateLabel() {
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        et_date.setText(sdf.format(myCalendar.getTime()));
+    }*/
+
 }
 
 /*
@@ -108,4 +151,17 @@ public interface OnFragmentInteractionListener {
     // TODO: Update argument type and name
     void onFragmentInteraction(Uri uri);
 }
+
+//        btnDate = (ImageButton) v.findViewById(R.id.ib_date);
+//
+//        btnDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(getContext(), com.example.mandaleeyp.teamrawrapp.DatePicker.class);
+//                i.putExtra("placeholder", "To where");
+//                startActivityForResult(i, TO_CODE);
+//            }
+//        });
+//
+
 */

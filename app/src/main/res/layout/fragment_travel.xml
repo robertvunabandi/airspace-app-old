@@ -1,13 +1,64 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mandaleeyp.teamrawrapp.fragments.TravelFragment">
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.5"-->
+        <!--android:orientation="vertical">-->
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/airlinecodeWrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_toLeftOf="@+id/flightnumberWrapper">
+
+        <EditText
+            android:id="@+id/til_airlineCode"
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapWords" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/flightnumberWrapper"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/airlinecodeWrapper">
+
+        <EditText
+            android:id="@+id/til_flightNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+            android:id="@+id/dateWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/flightnumberWrapper"
+            android:layout_marginTop="4dp">
+
+            <EditText
+                android:id="@+id/et_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.00"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="textPersonName" />
+        </android.support.design.widget.TextInputLayout>
+
+
+    <!--</LinearLayout>-->
+
+</LinearLayout>

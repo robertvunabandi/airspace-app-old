@@ -1,18 +1,23 @@
 package com.example.mandaleeyp.teamrawrapp.fragments;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import android.widget.DatePicker;
+import android.widget.EditText;
 
 import com.example.mandaleeyp.teamrawrapp.AirportSearchActivity;
 import com.example.mandaleeyp.teamrawrapp.R;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.RequestParams;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,6 +86,11 @@ public class SendReceiveFragment extends Fragment {
 
         btnTo = (Button) v.findViewById(R.id.bt_to);
         btnFrom = (Button) v.findViewById(R.id.bt_from);
+        final EditText et_date = (EditText) v.findViewById(R.id.et_date);
+        TextInputLayout dateWrapper = (TextInputLayout) v.findViewById(R.id.dateWrapper);
+        dateWrapper.setHint("Send by");
+
+
 
         btnTo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +107,32 @@ public class SendReceiveFragment extends Fragment {
                 Intent i = new Intent(getContext(), AirportSearchActivity.class);
                 i.putExtra("placeholder", "From");
                 startActivityForResult(i, FROM_CODE);
+            }
+        });
+
+        final Calendar myCalendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                // updateLabel();
+                String myFormat = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                et_date.setText(sdf.format(myCalendar.getTime()));
+            }
+        };
+
+        et_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
