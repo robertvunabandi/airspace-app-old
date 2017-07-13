@@ -15,7 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mandaleeyp.teamrawrapp.Flight;
+import com.example.mandaleeyp.teamrawrapp.models.Flight;
 import com.example.mandaleeyp.teamrawrapp.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;

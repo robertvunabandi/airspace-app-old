@@ -1,4 +1,4 @@
-package com.example.mandaleeyp.teamrawrapp;
+package com.example.mandaleeyp.teamrawrapp.models;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,8 +57,6 @@ public class Flight {
         // Parsing time
         flight.departureTime = departDateAndTime.substring(11, 16);
 
-        // TODO - Add stuff to flight
-        // flight.flightNumber = jsonObject.getString("flig");
         return flight;
     }
 
