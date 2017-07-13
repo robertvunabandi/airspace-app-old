@@ -38,6 +38,10 @@ public class TravelFragment extends Fragment {
     // parameter name for API key
     public final static String APP_KEY_PARAM = "appKey";
     public final static String APP_ID_PARAM = "appId";
+    // our database url
+    public final static String DB_HEROKU_URL = "http://mysterious-headland-54722.herokuapp.com";
+    public final static String DB_LOCAL_URL = "http://172.22.9.199:3000";
+    public final static String[] DB_URLS = {DB_HEROKU_URL, DB_LOCAL_URL};
 
     private int flightYear;
     private int flightMonth;
@@ -180,8 +184,15 @@ public class TravelFragment extends Fragment {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked OK button
                 // Send response to database
-
-
+                RequestParams params = new RequestParams();
+                // TODO - PUT PAREMETERS
+                client.post(DB_URLS[1] + "/travel_notice_add", params, new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        // TODO - Potentially do some stuffs with the db response
+                        additionalDetailsDialog();
+                    }
+                });
             }
 
         });
@@ -192,6 +203,10 @@ public class TravelFragment extends Fragment {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+
+    }
+
+    public void additionalDetailsDialog(){
 
     }
 
