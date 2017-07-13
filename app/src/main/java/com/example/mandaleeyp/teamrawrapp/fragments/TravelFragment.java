@@ -1,9 +1,11 @@
 package com.example.mandaleeyp.teamrawrapp.fragments;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +48,7 @@ public class TravelFragment extends Fragment {
 
     // instance fields
     AsyncHttpClient client;
+    Flight flight;
 
 
     public TravelFragment() {
@@ -67,7 +70,6 @@ public class TravelFragment extends Fragment {
 
         client = new AsyncHttpClient();
 
-//        getFlight();
 
     }
 
@@ -122,10 +124,6 @@ public class TravelFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent(getContext(), AirportSearchActivity.class);
-//                i.putExtra("placeholder", "Submit");
-//                startActivityForResult(i, FROM_CODE);
-
                 //create URL
                 String url = API_BASE_URL + "/v1/json/flight/" + airlineCode.getText() + "/" + flightNumber.getText() + "/departing/" + flightYear + "/" + flightMonth + "/" + flightDay;
                 Log.e("TravelFragment", url);
@@ -140,7 +138,7 @@ public class TravelFragment extends Fragment {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
-                            Flight flight = Flight.fromJSON(response);
+                            flight = Flight.fromJSON(response);
                             processResponse(response);
                         } catch (JSONException e) {
                             Toast.makeText(getContext(), String.format("WOW"), Toast.LENGTH_SHORT).show();
@@ -162,7 +160,6 @@ public class TravelFragment extends Fragment {
                         Toast.makeText(getContext(), String.format("error 3 %s", responseString), Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
         });
 
@@ -170,7 +167,32 @@ public class TravelFragment extends Fragment {
     }
 
     public void processResponse(JSONObject response) {
-        Toast.makeText(getContext(), String.format("%s", response.toString()), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), String.format("%s", response.toString()), Toast.LENGTH_SHORT).show();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(flight.getAirlineName() + "\nFlight " + flight.getAirlineCode() +  " " + flight.getFlightNumber() + "\n"
+                            + flight.getDepartureAirportCode() + " to " + flight.getArrivalAirportCode()
+                            + "\nDeparting on " + flight.getDepartFullDate() + " at " + flight.getDepartureTime())
+                .setTitle(R.string.dialog_title);
+
+        // Add the buttons
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+                // Send response to database
+
+
+            }
+
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 
 }
