@@ -3,7 +3,6 @@ package com.example.mandaleeyp.teamrawrapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -18,11 +17,12 @@ public class AdditionalDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+//        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        setTitle("Additional Details");
         setContentView(R.layout.activity_additional_details);
 
         // get the items in the XML
-        et_other = (EditText) findViewById(R.id.et_other);
+//        et_other = (EditText) findViewById(R.id.et_other);
         cb_envelope = (CheckBox) findViewById(R.id.cb_envelope);
         cb_smallBox = (CheckBox) findViewById(R.id.cb_smallBox);
         cb_largeBox = (CheckBox) findViewById(R.id.cb_largeBox);
@@ -41,35 +41,22 @@ public class AdditionalDetails extends AppCompatActivity {
         // Check which checkbox was clicked
         switch (view.getId()) {
             case R.id.cb_envelope: {
-                // TODO - change the index 0 of itemBools and maybe do other stuffs
-                if (checked) {
-
-                }
+                    itemBools[0] = checked;
                 break;
             }
             case R.id.cb_smallBox: {
-                // TODO - change the index 1 of itemBools and maybe do other stuffs
-                if (checked) {
-
-                }
+                    itemBools[1] = checked;
                 break;
             }
             case R.id.cb_largeBox: {
-                // TODO - change the index 2 of itemBools and maybe do other stuffs
-                if (checked) {
-
-                }
+                    itemBools[2] = checked;
                 break;
             }
             case R.id.cb_clothing: {
-                // TODO - change the index 3 of itemBools and maybe do other stuffs
-                if (checked) {
-
-                }
+                    itemBools[3] = checked;
                 break;
             }
             case R.id.cb_other: {
-                // TODO - change the index 3 of itemBools and maybe do other stuffs
                 if (checked) {
                     et_other.setVisibility(View.VISIBLE);
                 } else {
