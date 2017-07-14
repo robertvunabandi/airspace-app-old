@@ -1,13 +1,17 @@
 package com.example.mandaleeyp.teamrawrapp.models;
 
+import com.loopj.android.http.RequestParams;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 /**
  * Created by robertvunabandi on 7/13/17.
  */
 
+@Parcel
 public class TravelNotice {
     public final String[] itemTypes = {"envelope", "smbox", "lgbox", "clothing", "other"};
     // required: 3
@@ -89,5 +93,42 @@ public class TravelNotice {
 
         // return the tvl
         return tvl;
+    }
+
+    /* Creates parameters for sending a request to our database directly
+    from this travel notice using its own data, which is why the "this". */
+    public RequestParams createParams() {
+        /**
+         * Creates parameter for endpoint call /travel_notice_add and /travel_notice_update */
+        RequestParams params = new RequestParams();
+        // required, 3 parameters
+        params.put("tuid", this.tuid);
+        params.put("airline", this.airline);
+        params.put("flight_num", this.flight_num);
+        // optional: 7 parameters
+        params.put("item_envelope", this.item_envelope);
+        params.put("item_smbox", this.item_smbox);
+        params.put("item_lgbox", this.item_lgbox);
+        params.put("item_clothing", this.item_clothing);
+        params.put("item_other", this.item_other);
+        params.put("drop_off_flexibility", this.drop_off_flexibility);
+        params.put("pick_up_flexibility", this.pick_up_flexibility);
+        // required: 7 departure informations
+        params.put("dep_iata", this.dep_iata);
+        params.put("dep_city", this.dep_city);
+        params.put("dep_min", this.dep_min);
+        params.put("dep_hour", this.dep_hour);
+        params.put("dep_day", this.dep_day);
+        params.put("dep_month", this.dep_month);
+        params.put("dep_year", this.dep_year);
+        // required: 7 arrival informations
+        params.put("arr_iata", this.arr_iata);
+        params.put("arr_city", this.arr_city);
+        params.put("arr_min", this.arr_min);
+        params.put("arr_hour", this.arr_hour);
+        params.put("arr_day", this.arr_day);
+        params.put("arr_month", this.arr_month);
+        params.put("arr_year", this.arr_year);
+        return params;
     }
 }
