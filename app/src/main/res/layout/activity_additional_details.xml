@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context="com.example.mandaleeyp.teamrawrapp.AdditionalDetails">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -15,4 +16,130 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="12dp"
         android:text="Would you like to add any additional details?" />
+
+    <TextView
+        android:id="@+id/tv_itemQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_header"
+        android:text="What types of items can you bring? Check off all that apply" />
+    <!-- envelope, smbox, lgbox, clothing, other -->
+    <CheckBox
+        android:id="@+id/cb_envelope"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_itemQuestion"
+        android:onClick="onCheckboxClicked"
+        android:text="envelope" />
+
+    <CheckBox
+        android:id="@+id/cb_smallBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cb_envelope"
+        android:onClick="onCheckboxClicked"
+        android:text="small box" />
+
+    <CheckBox
+        android:id="@+id/cb_largeBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cb_smallBox"
+        android:onClick="onCheckboxClicked"
+        android:text="large box" />
+
+    <CheckBox
+        android:id="@+id/cb_clothing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cb_largeBox"
+        android:onClick="onCheckboxClicked"
+        android:text="clothing item" />
+
+    <CheckBox
+        android:id="@+id/cb_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cb_clothing"
+        android:onClick="onCheckboxClicked"
+        android:text="other:" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cb_other"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/cb_clothing"
+        android:layout_toEndOf="@+id/cb_other"
+        android:layout_toRightOf="@+id/cb_other">
+        <EditText
+            android:id="@+id/et_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- flexibility drop off -->
+    <TextView
+        android:id="@+id/tv_dropoff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cb_other"
+        android:text="Drop-Off Flexibility" />
+
+    <CheckBox
+        android:id="@+id/cb_meetAirport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_dropoff"
+        android:onClick="onCheckboxClicked"
+        android:text="Meet me at the airport to pass me the item!" />
+
+    <CheckBox
+        android:id="@+id/cb_dropoffOther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cb_meetAirport"
+        android:onClick="onCheckboxClicked"
+        android:text="other:" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_dropoffOther"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cb_dropoffOther"
+        android:layout_below="@+id/cb_meetAirport"
+        android:layout_toEndOf="@+id/cb_dropoffOther"
+        android:layout_toRightOf="@+id/cb_dropoffOther">
+
+        <EditText
+            android:id="@+id/et_dropoffOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </android.support.design.widget.TextInputLayout>
+
+
 </RelativeLayout>
