@@ -198,7 +198,7 @@ public class TravelFragment extends Fragment {
                 // first, create the travelNotice, all surrounded by try catch
                 try {
                     // creates a travel notice
-                    TravelNotice tvl = TravelNotice.fromJSON(response, traveler_id, null, null);
+                    final TravelNotice tvl = TravelNotice.fromJSON(response, traveler_id, null, null);
                     // get parameters from the method createParams() in TravelNotice, see that method
                     RequestParams params = tvl.createParams();
                     // Send a request to the database with endpoint /travel_notice_add
