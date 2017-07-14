@@ -2,6 +2,7 @@ package com.example.mandaleeyp.teamrawrapp.fragments;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -15,8 +16,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mandaleeyp.teamrawrapp.models.Flight;
+import com.example.mandaleeyp.teamrawrapp.AdditionalDetails;
 import com.example.mandaleeyp.teamrawrapp.R;
+import com.example.mandaleeyp.teamrawrapp.models.Flight;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -185,6 +187,8 @@ public class TravelFragment extends Fragment {
                 // User clicked OK button
                 // Send response to database
                 RequestParams params = new RequestParams();
+                Intent i = new Intent(getContext(), AdditionalDetails.class);
+                getContext().startActivity(i);
                 // TODO - PUT PAREMETERS
                 client.post(DB_URLS[1] + "/travel_notice_add", params, new JsonHttpResponseHandler(){
                     @Override
