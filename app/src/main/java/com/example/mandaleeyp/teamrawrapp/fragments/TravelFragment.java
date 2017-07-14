@@ -27,7 +27,6 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.parceler.Parcels;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -220,7 +219,7 @@ public class TravelFragment extends Fragment {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 String toastMessage = "JSON Parsing error in onSuccess";
-                                Log.e("TravelFragment", String.format("%s, %s", e.toString(), toastMessage));
+                                Log.e("TravelFragment", String.format("%s, %s", e, toastMessage));
                                 Toast.makeText(getContext(), String.format("%s", toastMessage), Toast.LENGTH_LONG).show();
                             }
                         }
@@ -266,7 +265,7 @@ public class TravelFragment extends Fragment {
     public void additionalDetailsDialog(TravelNotice travelNotice){
         Intent i = new Intent(getContext(), AdditionalDetails.class);
         // Parcels.wrap parselizes the data, to get it from the additionalDetails, do Parcels.unwrap(data.getParcelableExtra("travel_notice"));
-        i.putExtra("travel_notice", Parcels.wrap(travelNotice));
+        // i.putExtra("travel_notice", Parcels.wrap(travelNotice)); // TODO - FIX Parcel because it causes an error right now
         getContext().startActivity(i);
     }
 
