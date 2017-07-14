@@ -12,9 +12,9 @@ public class TravelNotice {
     public final String[] itemTypes = {"envelope", "smbox", "lgbox", "clothing", "other"};
     // required: 3
     public String tuid, airline, flight_num;
-    // optional: 7
+    // optional: 6
     public Boolean item_envelope, item_smbox, item_lgbox, item_clothing, item_other;
-    public String item_other_name, drop_off_flexibility, pick_up_flexibility;
+    public String drop_off_flexibility, pick_up_flexibility;
     // required: 12
     public String dep_iata, dep_city;
     public int dep_min, dep_hour, dep_day, dep_month, dep_year;
@@ -24,7 +24,7 @@ public class TravelNotice {
     // empty method for parcel just in case
     public TravelNotice() {}
 
-    public static TravelNotice fromJSON(JSONObject response, String tuid, Boolean[] itemBools, String itemOtherName, String[] flexibilities) throws JSONException{
+    public static TravelNotice fromJSON(JSONObject response, String tuid, Boolean[] itemBools, String[] flexibilities) throws JSONException{
         // initiate an empty travelNotice
         TravelNotice tvl = new TravelNotice();
 
@@ -45,10 +45,9 @@ public class TravelNotice {
             tvl.item_lgbox = itemBools[2];
             tvl.item_clothing = itemBools[3];
             tvl.item_other = itemBools[4];
-            tvl.item_other_name = itemOtherName;
         } else {
             // set everything to true (assume traveler is okay with carrying anything) and set item_other to false and item_other_name to null
-            tvl.item_envelope = true; tvl.item_smbox = true; tvl.item_lgbox = true; tvl.item_clothing = true; tvl.item_other = false; tvl.item_other_name = null;
+            tvl.item_envelope = true; tvl.item_smbox = true; tvl.item_lgbox = true; tvl.item_clothing = true; tvl.item_other = true;
         }
         if (flexibilities != null){
             // if the flexibilities are put, update flexibilities
