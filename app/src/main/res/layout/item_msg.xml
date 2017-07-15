@@ -25,32 +25,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvMsg"
+        android:background="@drawable/msg_background_border"
         android:orientation="vertical"
-        android:padding="5dp"
-        android:background="@drawable/msg_background_border">
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/tvItemCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="24sp"
-            tools:text="Total: 2 items"
-            android:layout_margin="5dp"/>
+            tools:text="Total: 2 items" />
 
         <TextView
             android:id="@+id/tvItemType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="24sp"
-            tools:text="Type: Envelope"
-            android:layout_margin="5dp" />
+            tools:text="Type: Envelope" />
 
         <TextView
-            android:id="@+id/tvExtraInfo"
+            android:id="@+id/tvExtraInfoFromSender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
