@@ -7,32 +7,61 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:id="@+id/bt_to"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TO"
-        android:onClick="toSearch"
-        android:layout_below="@+id/bt_from"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <!--<Button-->
+        <!--android:id="@+id/bt_to"-->
+        <!--style="@style/Widget.AppCompat.Button.Colored"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="TO"-->
+        <!--android:onClick="toSearch"-->
+        <!--android:layout_below="@+id/bt_from"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
 
-    <Button
-        android:id="@+id/bt_from"
-        style="@style/Widget.AppCompat.Button.Colored"
+    <!--<Button-->
+        <!--android:id="@+id/bt_from"-->
+        <!--style="@style/Widget.AppCompat.Button.Colored"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="FROM"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FROM"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:id="@+id/et_from"
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:ems="10"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/til_from"
+        android:layout_marginTop="4dp">
+
+        <EditText
+            android:id="@+id/et_to"
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:ems="10"/>
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/dateWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_to"
+        android:layout_below="@+id/til_to"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -49,6 +78,15 @@
         android:focusable="false"
         android:inputType="date" />
     </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/bt_search"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateWrapper"
+        android:layout_centerHorizontal="true"
+        android:text="search" />
 
 
 </RelativeLayout>
