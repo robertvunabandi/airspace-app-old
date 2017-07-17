@@ -19,8 +19,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".AirportSearchActivity" />
-        <activity android:name=".AdditionalDetails"
-            android:theme="@style/Theme.AppCompat.Light.Dialog"></activity>
+        <activity
+            android:name=".AdditionalDetails"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity android:name=".TripResultsActivity"></activity>
     </application>
 
 </manifest>

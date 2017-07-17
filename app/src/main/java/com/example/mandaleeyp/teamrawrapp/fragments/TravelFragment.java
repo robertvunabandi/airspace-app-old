@@ -193,7 +193,7 @@ public class TravelFragment extends Fragment {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked OK button, so send response to database
 
-                String traveler_id = "temporaryStringForNow"; // TODO - Make it so the traveler id is actually the id of the person using the app like "get res client"
+                String traveler_id = "596d0b5626bffc280b32187e"; // TODO - Make it so the traveler id is actually the id of the person using the app like "get res client"
                 // first, create the travelNotice, all surrounded by try catch
                 try {
                     // creates a travel notice
