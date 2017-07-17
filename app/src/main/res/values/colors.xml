@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- PRIMARY COLORS -->
+    <color name="PLight">#8e99f3</color>
+    <color name="PRegular">#5c6bc0</color>
+    <color name="PDark">#26418f</color>
+    <!-- SECONDARY COLORS -->
+    <color name="SXLight">#b7c4c8</color>
+    <color name="SLight">#8ba0a6</color>
+    <color name="SRegular">#5d7277</color>
+    <color name="SDark">#33474b</color>
+    <!-- WHITE COLOR FOR TEXTS -->
+    <color name="White">#fff</color>
+    <!-- POTENTIAL FOR ACCENTS -->
+    <color name="PotentialAccent">#00e676</color>
 </resources>
