@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.mandaleeyp.teamrawrapp.models.TravelNotice;
 
@@ -16,8 +17,7 @@ import java.util.List;
 
 public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.ViewHolder> {
 
-
-
+    // declare variables
     private List<TravelNotice> trips;
     Context context;
 
@@ -26,20 +26,22 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
     }
 
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View tweetView = inflater.inflate(R.layout.item_trip_result, parent, false);
-        RecyclerView.ViewHolder viewHolder = new RecyclerView.ViewHolder(tweetView) {
+        View tripView = inflater.inflate(R.layout.item_trip_result, parent, false);
+        ViewHolder viewHolder = new ViewHolder(tripView) {
         };
-        return (ViewHolder) viewHolder;
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(TripResultAdapter.ViewHolder holder, int position) {
+        TravelNotice trip = trips.get(position);
+
+
 
     }
 
@@ -51,6 +53,9 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView tvAirportCodes;
+        public TextView tvFlightTime;
 
 
         public ViewHolder(View itemView) {

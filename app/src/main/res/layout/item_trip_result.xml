@@ -2,4 +2,89 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tvAirportCodes_itr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JFK ➝ LAX"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/tvName_itr"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tvFlightTime_itr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="departure: 6:15 am \narrival: 12:14 pm"
+        android:textSize="18sp"
+        android:layout_alignBottom="@+id/tvAirportCodes_itr"
+        android:layout_toRightOf="@+id/tvAirportCodes_itr"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/tvName_itr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Amanda's Trip" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvFlightTime_itr"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amanda can bring . . ." />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5"
+            >
+
+            <CheckBox
+                android:id="@+id/checkBox9"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="envelopes" />
+
+            <CheckBox
+                android:id="@+id/checkBox11"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkBox9"
+                android:text="large boxes" />
+
+            <CheckBox
+                android:id="@+id/checkBox16"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/checkBox9"
+                android:text="small boxes" />
+
+            <CheckBox
+                android:id="@+id/checkBox17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/checkBox11"
+                android:layout_toRightOf="@+id/checkBox11"
+                android:text="clothing items" />
+
+            <CheckBox
+                android:id="@+id/checkBox18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/checkBox16"
+                android:text="others" />
+        </RelativeLayout>
+    </RelativeLayout>
+
 </RelativeLayout>
