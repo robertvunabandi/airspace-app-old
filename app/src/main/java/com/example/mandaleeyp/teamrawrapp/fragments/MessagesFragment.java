@@ -15,14 +15,6 @@ import com.example.mandaleeyp.teamrawrapp.models.Msg;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MessagesFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MessagesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 
 
 public class MessagesFragment extends Fragment {
@@ -81,7 +73,7 @@ public class MessagesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.fragment_messages);
+      //  setContentView(R.layout.fragment_messages);
 
 
 
