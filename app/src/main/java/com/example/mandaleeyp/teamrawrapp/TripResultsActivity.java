@@ -20,14 +20,11 @@ public class TripResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trip_results);
 
         tripResults = new ArrayList<>();
-
-        RecyclerView rlTripResults = (RecyclerView) findViewById(R.id.rlTripResults);
         tripAdapter = new TripResultAdapter(tripResults);
+        RecyclerView rvTripResults = (RecyclerView) findViewById(R.id.rvTripResults);
 
 
-        // rlTripResults.setAdapter(tripAdapter);
-
-
+        rvTripResults.setAdapter(tripAdapter);
     }
 
 
