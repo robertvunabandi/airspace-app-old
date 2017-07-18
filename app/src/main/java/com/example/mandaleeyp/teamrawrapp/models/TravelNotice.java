@@ -26,9 +26,10 @@ public class TravelNotice {
     public int arr_min, arr_hour, arr_day, arr_month, arr_year;
 
     // empty method for parcel just in case
-    public TravelNotice() {}
+    public TravelNotice() {
+    }
 
-    public static TravelNotice fromJSON(JSONObject response, String tuid, Boolean[] itemBools, String[] flexibilities) throws JSONException{
+    public static TravelNotice fromJSON(JSONObject response, String tuid, Boolean[] itemBools, String[] flexibilities) throws JSONException {
         // initiate an empty travelNotice
         TravelNotice tvl = new TravelNotice();
 
@@ -51,23 +52,28 @@ public class TravelNotice {
             tvl.item_other = itemBools[4];
         } else {
             // set everything to true (assume traveler is okay with carrying anything) and set item_other to false and item_other_name to null
-            tvl.item_envelope = true; tvl.item_smbox = true; tvl.item_lgbox = true; tvl.item_clothing = true; tvl.item_other = true;
+            tvl.item_envelope = true;
+            tvl.item_smbox = true;
+            tvl.item_lgbox = true;
+            tvl.item_clothing = true;
+            tvl.item_other = true;
         }
-        if (flexibilities != null){
+        if (flexibilities != null) {
             // if the flexibilities are put, update flexibilities
             tvl.drop_off_flexibility = flexibilities[0];
             tvl.pick_up_flexibility = flexibilities[1];
         } else {
             // otherwise set them to null
-            tvl.drop_off_flexibility = null; tvl.pick_up_flexibility = null;
+            tvl.drop_off_flexibility = null;
+            tvl.pick_up_flexibility = null;
         }
 
         // add the departure informations
         tvl.dep_iata = scheduledFlights.getString("departureAirportFsCode");
 
-        for (int i = 0; i < airports.length(); i++){
+        for (int i = 0; i < airports.length(); i++) {
             // check if this airport's iata matches that of the depature and then get the name
-            if (airports.getJSONObject(i).getString("fs").equals(tvl.dep_iata)){
+            if (airports.getJSONObject(i).getString("fs").equals(tvl.dep_iata)) {
                 tvl.dep_city = airports.getJSONObject(i).getString("city"); // GET THE CITY
             }
         }
@@ -79,9 +85,9 @@ public class TravelNotice {
 
         // add the arrival information
         tvl.arr_iata = scheduledFlights.getString("arrivalAirportFsCode");
-        for (int i = 0; i < airports.length(); i++){
+        for (int i = 0; i < airports.length(); i++) {
             // check if this airport's iata matches that of the depature and then get the name
-            if (airports.getJSONObject(i).getString("fs").equals(tvl.arr_iata)){
+            if (airports.getJSONObject(i).getString("fs").equals(tvl.arr_iata)) {
                 tvl.arr_city = airports.getJSONObject(i).getString("city"); // GET THE CITY
             }
         }
@@ -130,5 +136,50 @@ public class TravelNotice {
         params.put("arr_month", this.arr_month);
         params.put("arr_year", this.arr_year);
         return params;
+    }
+
+    public static TravelNotice fromJSONDB(JSONObject response) throws JSONException {
+        // initiate an empty travelNotice
+        TravelNotice tvl = new TravelNotice();
+
+
+        // get the important required informations into tvl
+        tvl.tuid = response.getString("_id");
+        tvl.airline = response.getString("airline");
+        tvl.flight_num = response.getString("flight_num");
+
+        // add the informations for filtering, a lot of which passed onto in arguments
+
+        tvl.item_envelope = response.getBoolean("item_envelopes");
+        tvl.item_smbox = response.getBoolean("item_sbbox");
+        tvl.item_lgbox = response.getBoolean("item_lgbox");
+        tvl.item_clothing = response.getBoolean("item_clothing");
+        tvl.item_other = response.getBoolean("item_other");
+
+        // if the flexibilities are put, update flexibilities
+        tvl.drop_off_flexibility = response.getString("drop_off_flexibility");
+        tvl.pick_up_flexibility = response.getString("pick_up_flexibility");
+
+
+        // add the departure informations
+        tvl.dep_iata = response.getString("dep_iata");
+        tvl.dep_city = response.getString("dep_city");
+        tvl.dep_hour = response.getInt("dep_hour");
+        tvl.dep_min = response.getInt("dep_min");
+        tvl.dep_day = response.getInt("dep_day");
+        tvl.dep_month = response.getInt("dep_month");
+        tvl.dep_year = response.getInt("dep_year");
+
+        // add the arrival information
+        tvl.arr_iata = response.getString("arr_iata");
+        tvl.arr_city = response.getString("arr_city");
+        tvl.arr_hour = response.getInt("arr_hour");
+        tvl.arr_min = response.getInt("arr_min");
+        tvl.arr_day = response.getInt("arr_day");
+        tvl.arr_month = response.getInt("arr_month");
+        tvl.arr_year = response.getInt("arr_year");
+
+        // return the tvl
+        return tvl;
     }
 }
