@@ -67,8 +67,6 @@ public class TravelFragment extends Fragment {
     public static TravelFragment newInstance(String param1, String param2) {
         TravelFragment fragment = new TravelFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -78,7 +76,6 @@ public class TravelFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         client = new AsyncHttpClient();
-
 
     }
 
@@ -206,8 +203,9 @@ public class TravelFragment extends Fragment {
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             try {
                                 if (!response.getBoolean("error")){
+                                    TravelNotice tvl_updated = TravelNotice.fromJSONServer(response.getJSONObject("data"));
                                     // in case of no error, do the additionalDetailsDialog(); method
-                                    additionalDetailsDialog(tvl);
+                                    additionalDetailsDialog(tvl_updated);
                                 } else {
                                     // get the error from the DB
                                     String error = response.getJSONObject("message").toString();
@@ -227,19 +225,19 @@ public class TravelFragment extends Fragment {
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                             Log.e(TAG, String.format("CODE: %s ERROR: %s", statusCode, errorResponse));
-                            Toast.makeText(getContext(), String.format("error 1 %s", errorResponse), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), String.format("error 1 %s", errorResponse), Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                             Log.e(TAG, String.format("CODE: %s ERROR: %s", statusCode, errorResponse));
-                            Toast.makeText(getContext(), String.format("error 2 %s", errorResponse), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), String.format("error 2 %s", errorResponse), Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                             Log.e(TAG, String.format("%s", responseString));
-                            Toast.makeText(getContext(), String.format("error 3 %s", responseString), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), String.format("error 3 %s", responseString), Toast.LENGTH_LONG).show();
                         }
                     });
                 } catch (JSONException e) {
