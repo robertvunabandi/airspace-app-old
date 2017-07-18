@@ -67,8 +67,6 @@ public class TravelFragment extends Fragment {
     public static TravelFragment newInstance(String param1, String param2) {
         TravelFragment fragment = new TravelFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -78,7 +76,6 @@ public class TravelFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         client = new AsyncHttpClient();
-
 
     }
 

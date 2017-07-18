@@ -15,7 +15,7 @@ import org.parceler.Parcel;
 public class TravelNotice {
     public final String[] itemTypes = {"envelope", "smbox", "lgbox", "clothing", "other"};
     // required: 3
-    public String tuid, airline, flight_num;
+    public String id, tuid, airline, flight_num;
     // optional: 6
     public Boolean item_envelope, item_smbox, item_lgbox, item_clothing, item_other;
     public String drop_off_flexibility, pick_up_flexibility;
@@ -38,6 +38,7 @@ public class TravelNotice {
         JSONArray airports = response.getJSONObject("appendix").getJSONArray("airports");
 
         // get the important required informations into tvl
+        tvl.id = null;
         tvl.tuid = tuid;
         tvl.airline = scheduledFlights.getString("carrierFsCode");
         tvl.flight_num = scheduledFlights.getString("flightNumber");
@@ -106,8 +107,10 @@ public class TravelNotice {
     public RequestParams createParams() {
         /**
          * Creates parameter for endpoint call /travel_notice_add and /travel_notice_update */
+        // TODO = be careful about _id being null
         RequestParams params = new RequestParams();
         // required, 3 parameters
+        params.put("_id", this.id);
         params.put("tuid", this.tuid);
         params.put("airline", this.airline);
         params.put("flight_num", this.flight_num);
@@ -138,13 +141,13 @@ public class TravelNotice {
         return params;
     }
 
-    public static TravelNotice fromJSONDB(JSONObject response) throws JSONException {
+    public static TravelNotice fromJSONServer(JSONObject response) throws JSONException {
         // initiate an empty travelNotice
         TravelNotice tvl = new TravelNotice();
 
-
         // get the important required informations into tvl
-        tvl.tuid = response.getString("_id");
+        tvl.id = response.getString("_id");
+        tvl.tuid = response.getString("tuid");
         tvl.airline = response.getString("airline");
         tvl.flight_num = response.getString("flight_num");
 

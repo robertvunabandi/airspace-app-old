@@ -26,8 +26,4 @@ public class TripResultsActivity extends AppCompatActivity {
 
         rvTripResults.setAdapter(tripAdapter);
     }
-
-
-
-
 }
