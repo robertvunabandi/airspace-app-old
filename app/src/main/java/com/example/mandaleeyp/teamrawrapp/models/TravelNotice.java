@@ -5,15 +5,13 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.parceler.Parcel;
 
 /**
  * Created by robertvunabandi on 7/13/17.
  */
 
-@Parcel
+// @Parcel
 public class TravelNotice {
-    public final String[] itemTypes = {"envelope", "smbox", "lgbox", "clothing", "other"};
     // required: 3
     public String id, tuid, airline, flight_num;
     // optional: 6
@@ -106,9 +104,8 @@ public class TravelNotice {
     /* Creates parameters for sending a request to our database directly
     from this travel notice using its own data, which is why the "this". */
     public RequestParams createParams() {
-        /**
-         * Creates parameter for endpoint call /travel_notice_add and /travel_notice_update */
-        // TODO = be careful about _id being null
+        /* creates parameter for endpoint call /travel_notice_add and /travel_notice_update */
+        // TODO - be careful about _id being null
         RequestParams params = new RequestParams();
         // required, 3 parameters
         params.put("_id", this.id);
