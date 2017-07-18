@@ -53,11 +53,19 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
 
 
         holder.tvName.setText(trip.tuid + "'s Trip:");
-        holder.tvFlightDate.setText("Departure:" + trip.dep_month + "/" + trip.dep_day + "/" + trip.dep_year
-                    + "\n");
+        holder.tvFlightDate.setText("Departure: " + trip.dep_month + "/" + trip.dep_day + "/" + trip.dep_year
+                    + "\n" + "Arrival: " + trip.arr_month + "/" + trip.arr_day + "/" + trip.arr_year);
         holder.tvAirportCodes.setText(trip.dep_iata + " ➝ " + trip.arr_iata);
-        holder.tvFlightTime.setText("");
+        holder.tvFlightTime.setText(trip.dep_hour + ":" + trip.dep_min + "      " + trip.arr_hour + ":" + trip.arr_min);
 
+        holder.cb_envelope_itr.setChecked(trip.item_envelopes);
+        holder.cb_largeBox_itr.setChecked(trip.item_lgbox);
+        holder.cb_smallBox_itr.setChecked(trip.item_smbox);
+        holder.cb_clothing_itr.setChecked(trip.item_clothing);
+        holder.cb_other_itr.setChecked(trip.item_other);
+
+        holder.tv_dropoff.setText(trip.drop_off_flexibility);
+        holder.tv_pickup.setText(trip.pick_up_flexibility);
 
 
 
@@ -103,6 +111,9 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
         public CheckBox cb_clothing_itr;
         public CheckBox cb_other_itr;
 
+        public TextView tv_dropoff;
+        public TextView tv_pickup;
+
         public Button btn_request_itr;
         public Button btn_askQ_itr;
 
@@ -126,16 +137,31 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
             cb_clothing_itr = (CheckBox) itemView.findViewById(R.id.cb_clothing_itr);
             cb_other_itr = (CheckBox) itemView.findViewById(R.id.cb_other_itr);
 
+            tv_dropoff = (TextView) itemView.findViewById(R.id.tv_dropoff_itr);
+            tv_pickup = (TextView) itemView.findViewById(R.id.tv_pickup_itr);
+
             btn_request_itr = (Button) itemView.findViewById(R.id.btn_request_itr);
             btn_askQ_itr = (Button) itemView.findViewById(R.id.btn_askQ_itr);
 
 
+            btn_request_itr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    // Intent i = new Intent(context, RequestActivity.class);
+                    // context.startActivity(i);
+                }
+            });
 
-
-
+            btn_askQ_itr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    // Intent i = new Intent(context, NewConversationActivity.class);
+                    // context.startActivity(i);
+                }
+            });
 
         }
     }
-
-
 }
