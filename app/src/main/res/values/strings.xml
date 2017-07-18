@@ -7,6 +7,8 @@
     <string name="dialog_message">Hello blank fragment</string>
     <string name="ok">Yes</string>
     <string name="cancel">No, go back</string>
+    <!-- AD stands for additional details -->
+    <string name="dialogADQuestionBringing">WHAT CAN YOU BRING WITH YOU?</string>
 
 
 </resources>

@@ -6,163 +6,256 @@
     android:layout_height="match_parent"
     android:padding="8dp"
     tools:context="com.example.mandaleeyp.teamrawrapp.AdditionalDetails">
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"
-        tools:context="com.example.mandaleeyp.teamrawrapp.AdditionalDetails">
-
-        <TextView
-            android:id="@+id/tv_itemQuestion"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="What types of items can you bring? Check off all that apply" />
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            tools:context="com.example.mandaleeyp.teamrawrapp.AdditionalDetails">
 
-        <!-- envelope, smbox, lgbox, clothing, other -->
-        <CheckBox
-            android:id="@+id/cb_envelope"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tv_itemQuestion"
-            android:onClick="onCheckboxClicked"
-            android:text="envelope" />
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ADDITIONAL DETAILS"
+                android:textColor="@color/SXDark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <CheckBox
-            android:id="@+id/cb_smallBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/tv_itemQuestion"
-            android:layout_marginEnd="65dp"
-            android:layout_marginRight="65dp"
-            android:onClick="onCheckboxClicked"
-            android:text="small box" />
+            <RelativeLayout
+                android:id="@+id/separator_tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/SXXDark" />
 
-        <CheckBox
-            android:id="@+id/cb_largeBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/cb_smallBox"
-            android:onClick="onCheckboxClicked"
-            android:text="large box" />
+            <TextView
+                android:id="@+id/tv_itemQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/separator_tv_title"
+                android:text="@string/dialogADQuestionBringing"
+                android:textColor="@color/PDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <CheckBox
-            android:id="@+id/cb_clothing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/cb_smallBox"
-            android:layout_alignStart="@+id/cb_smallBox"
-            android:layout_below="@+id/cb_smallBox"
-            android:onClick="onCheckboxClicked"
-            android:text="clothing item" />
+            <RelativeLayout
+                android:id="@+id/rl_checkboxes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_itemQuestion"
+                android:padding="8dp">
 
-        <CheckBox
-            android:id="@+id/cb_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/cb_clothing"
-            android:onClick="onCheckboxClicked"
-            android:text="other:" />
+                <LinearLayout
+                    android:id="@+id/rl_choicesCheckboxes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <!-- envelope, smbox, lgbox, clothing, other -->
+                    <LinearLayout
+                        android:id="@+id/ll_choicesCheckboxes1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_other"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/cb_other"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/cb_clothing"
-            android:layout_toEndOf="@+id/cb_other"
-            android:layout_toRightOf="@+id/cb_other">
+                        <CheckBox
+                            android:id="@+id/cb_envelope"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="@color/PRegular"
+                            android:buttonTint="@color/SDark"
+                            android:onClick="onCheckboxClicked"
+                            android:text="envelope"
+                            android:textColor="@color/SRegular"
+                            android:textSize="16sp" />
 
-        </android.support.design.widget.TextInputLayout>
+                        <CheckBox
+                            android:id="@+id/cb_clothing"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="@color/PRegular"
+                            android:buttonTint="@color/SDark"
+                            android:onClick="onCheckboxClicked"
+                            android:text="clothing item"
+                            android:textColor="@color/SRegular"
+                            android:textSize="16sp" />
+                    </LinearLayout>
 
-        <!-- flexibility drop off -->
-        <TextView
-            android:id="@+id/tv_dropoff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/cb_other"
-            android:text="Drop-Off Flexibility" />
+                    <LinearLayout
+                        android:id="@+id/ll_choicesCheckboxes2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_dropoff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tv_dropoff">
+                        <CheckBox
+                            android:id="@+id/cb_smallBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="@color/PRegular"
+                            android:buttonTint="@color/SDark"
+                            android:onClick="onCheckboxClicked"
+                            android:text="small box"
+                            android:textColor="@color/SRegular"
+                            android:textSize="16sp" />
 
-        </android.support.design.widget.TextInputLayout>
+                        <CheckBox
+                            android:id="@+id/cb_largeBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="@color/PRegular"
+                            android:buttonTint="@color/SDark"
+                            android:onClick="onCheckboxClicked"
+                            android:text="large box"
+                            android:textColor="@color/SRegular"
+                            android:textSize="16sp" />
+                    </LinearLayout>
 
-        <EditText
-            android:id="@+id/et_dropoff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tv_dropoff"
-            android:hint="Meet me at the airport to pass me the item!"
-            android:textSize="14sp" />
 
-        <!-- flexibility pick up -->
-        <TextView
-            android:id="@+id/tv_pickup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/et_dropoff"
-            android:text="Pick-Up Flexibility" />
+                </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_pickup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tv_pickup">
+                <LinearLayout
+                    android:id="@+id/rl_choicesOther"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_choicesCheckboxes"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp">
 
-        </android.support.design.widget.TextInputLayout>
+                    <CheckBox
+                        android:id="@+id/cb_other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerHorizontal="true"
+                        android:buttonTint="@color/SDark"
+                        android:onClick="onCheckboxClicked"
+                        android:text="other: "
+                        android:textColor="@color/SRegular"
+                        android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/et_pickup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tv_pickup"
-            android:hint="Meet me at the airport to collect the item!"
-            android:textSize="14sp" />
+                    <EditText
+                        android:id="@+id/et_other"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/cb_other"
+                        android:layout_toRightOf="@+id/cb_other"
+                        android:backgroundTint="@color/SXLight"
+                        android:textColor="@color/PRegular"
+                        android:textColorHighlight="@color/PRegular"
+                        android:textColorHint="@color/SXLight"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+                </LinearLayout>
 
-        <Button
-            android:id="@+id/bt_addDetails"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/et_pickup"
-            android:layout_marginTop="16dp"
-            android:text="add details" />
-    </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <!-- flexibility pick up -->
+            <RelativeLayout
+                android:id="@+id/rl_flexiblityPickup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_checkboxes">
+
+                <TextView
+                    android:id="@+id/tv_pickup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="HOW FLEXIBLE ARE YOU WITH PICKING UP ITEMS?"
+                    android:textColor="@color/PDark"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_flexiblityPickupInit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_pickup"
+                    android:padding="8dp">
+
+                    <EditText
+                        android:id="@+id/et_pickup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:backgroundTint="@color/SXLight"
+                        android:hint="Meet me at the airport to collect the item!"
+                        android:textColor="@color/PRegular"
+                        android:textColorHighlight="@color/PRegular"
+                        android:textColorHint="@color/SXLight"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <!-- flexibility drop off -->
+            <RelativeLayout
+                android:id="@+id/rl_flexiblityDropoff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_flexiblityPickup">
+
+
+                <TextView
+                    android:id="@+id/tv_dropoff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="HOW FLEXIBLE ARE YOU WITH DROPPING OFF ITEMS?"
+                    android:textColor="@color/PDark"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_flexiblityDropoffInit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_dropoff"
+                    android:padding="8dp">
+
+                    <EditText
+                        android:id="@+id/et_dropoff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:backgroundTint="@color/SXLight"
+                        android:hint="Meet me at the airport to pass me the item!"
+                        android:textColor="@color/PRegular"
+                        android:textColorHighlight="@color/PRegular"
+                        android:textColorHint="@color/SXLight"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bt_addDetails"
+                style="@android:style/Widget.Material.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/rl_flexiblityDropoff"
+                android:background="@color/PRegular"
+                android:text="Confirm"
+                android:textColor="@color/White" />
+        </RelativeLayout>
     </ScrollView>
 
 </LinearLayout>

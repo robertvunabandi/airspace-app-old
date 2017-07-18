@@ -261,10 +261,10 @@ public class TravelFragment extends Fragment {
     }
 
     public void additionalDetailsDialog(TravelNotice travelNotice){
-        Intent i = new Intent(getContext(), AdditionalDetails.class);
+        Intent additionalDetailsDialog = new Intent(getContext(), AdditionalDetails.class);
         // Parcels.wrap parselizes the data, to get it from the additionalDetails, do Parcels.unwrap(data.getParcelableExtra("travel_notice"));
-        // i.putExtra("travel_notice", Parcels.wrap(travelNotice)); // TODO - FIX Parcel because it causes an error right now
-        getContext().startActivity(i);
+        // additionalDetailsDialog.putExtra("travel_notice", Parcels.wrap(travelNotice)); // TODO - FIX Parcel because it causes an error right now
+        getContext().startActivity(additionalDetailsDialog);
     }
 
 }
