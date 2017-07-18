@@ -36,7 +36,12 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
     @Override
     public void onBindViewHolder(UpcomingTripAdapter.ViewHolder holder, int position) {
         TravelNotice trips = mTrips.get(position);
-
+        holder.tv_from.setText(trips.dep_city);
+        holder.tv_to.setText(trips.arr_city);
+        holder.tv_dateFrom.setText(trips.dep_month + "/" + trips.dep_day + "/" + trips.dep_year);
+        holder.tv_dateTo.setText(trips.arr_month + "/" + trips.arr_day + "/" + trips.arr_year);
+        holder.tv_fromTime.setText(trips.dep_hour + ":" + trips.dep_min);
+        holder.tv_toTime.setText(trips.arr_hour + ":" + trips.arr_min);
     }
 
     @Override
@@ -81,7 +86,6 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
             bt_edit = (Button) itemView.findViewById(R.id.bt_edit);
             bt_delete = (Button) itemView.findViewById(R.id.bt_delete);
             bt_detail = (Button) itemView.findViewById(R.id.bt_detail);
-
         }
     }
 
@@ -95,7 +99,6 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
         mTrips.addAll(list);
         notifyDataSetChanged();
     }
-
 }
 
 
