@@ -1,7 +1,10 @@
 package com.example.mandaleeyp.teamrawrapp.fragments;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,8 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.mandaleeyp.teamrawrapp.R;
+import com.example.mandaleeyp.teamrawrapp.TripResultsActivity;
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,17 +53,34 @@ public class SendReceiveFragment extends Fragment {
         TextInputLayout til_from = (TextInputLayout) v.findViewById(R.id.til_from);
         TextInputLayout til_to = (TextInputLayout) v.findViewById(R.id.til_to);
         Button btSearch = (Button) v.findViewById(R.id.bt_search);
+        final ImageView ivToggleFilter = (ImageView) v.findViewById(R.id.iv_toggleFilters);
+        final ExpandableRelativeLayout erlFilter = (ExpandableRelativeLayout) v.findViewById(R.id.erl_filters);
 
         // Setting hints
-        til_from.setHint("From");
-        til_to.setHint("To");
-        dateWrapper.setHint("Send by");
+        til_from.setHint("Where from?");
+        til_to.setHint("Where to?");
+        dateWrapper.setHint("When by?");
+
+        ivToggleFilter.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                // Toggle the expandable view
+                erlFilter.toggle();
+
+                // TODO - Change the drawable to either expanded or collapsed
+                // TODO - Add filters in XML
+            }
+        });
 
 
         // Click listener for search button
         btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent i = new Intent(getContext(), TripResultsActivity.class);
+                getContext().startActivity(i);
 
             }
         });
