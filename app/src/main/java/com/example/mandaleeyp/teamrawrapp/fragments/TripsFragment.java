@@ -105,29 +105,31 @@ public class TripsFragment extends Fragment {
                     populateList(response.getJSONArray("data"));
                     Toast.makeText(getContext(), String.format("%s", response), Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
-
-                }
             }
+        }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(getContext(), String.format("error 1 %s", errorResponse), Toast.LENGTH_SHORT).show();
-            }
+        @Override
+        public void onFailure ( int statusCode, Header[] headers, Throwable throwable, JSONObject
+        errorResponse){
+            Toast.makeText(getContext(), String.format("error 1 %s", errorResponse), Toast.LENGTH_SHORT).show();
+        }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-                Toast.makeText(getContext(), String.format("error 2 %s", errorResponse), Toast.LENGTH_SHORT).show();
-            }
+        @Override
+        public void onFailure ( int statusCode, Header[] headers, Throwable throwable, JSONArray
+        errorResponse){
+            Toast.makeText(getContext(), String.format("error 2 %s", errorResponse), Toast.LENGTH_SHORT).show();
+        }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(getContext(), String.format("error 3"), Toast.LENGTH_SHORT).show();
-            }
-        });
+        @Override
+        public void onFailure ( int statusCode, Header[] headers, String responseString, Throwable
+        throwable){
+            Toast.makeText(getContext(), String.format("error 3"), Toast.LENGTH_SHORT).show();
+        }
+    });
 
-    }
+}
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
+public interface OnFragmentInteractionListener {
+    void onFragmentInteraction(Uri uri);
+}
 }
