@@ -206,8 +206,9 @@ public class TravelFragment extends Fragment {
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             try {
                                 if (!response.getBoolean("error")){
+                                    TravelNotice tvl_updated = TravelNotice.fromJSONDB(response.getJSONObject("data"));
                                     // in case of no error, do the additionalDetailsDialog(); method
-                                    additionalDetailsDialog(tvl);
+                                    additionalDetailsDialog(tvl_updated);
                                 } else {
                                     // get the error from the DB
                                     String error = response.getJSONObject("message").toString();
