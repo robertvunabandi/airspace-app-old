@@ -225,19 +225,19 @@ public class TravelFragment extends Fragment {
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                             Log.e(TAG, String.format("CODE: %s ERROR: %s", statusCode, errorResponse));
-                            Toast.makeText(getContext(), String.format("error 1 %s", errorResponse), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), String.format("error 1 %s", errorResponse), Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                             Log.e(TAG, String.format("CODE: %s ERROR: %s", statusCode, errorResponse));
-                            Toast.makeText(getContext(), String.format("error 2 %s", errorResponse), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), String.format("error 2 %s", errorResponse), Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                             Log.e(TAG, String.format("%s", responseString));
-                            Toast.makeText(getContext(), String.format("error 3 %s", responseString), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), String.format("error 3 %s", responseString), Toast.LENGTH_LONG).show();
                         }
                     });
                 } catch (JSONException e) {

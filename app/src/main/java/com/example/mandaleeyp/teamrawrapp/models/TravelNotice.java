@@ -17,13 +17,14 @@ public class TravelNotice {
     // required: 3
     public String id, tuid, airline, flight_num;
     // optional: 6
-    public Boolean item_envelope, item_smbox, item_lgbox, item_clothing, item_other;
+    public Boolean item_envelopes, item_smbox, item_lgbox, item_clothing, item_other;
     public String drop_off_flexibility, pick_up_flexibility;
     // required: 12
     public String dep_iata, dep_city;
     public int dep_min, dep_hour, dep_day, dep_month, dep_year;
     public String arr_iata, arr_city;
     public int arr_min, arr_hour, arr_day, arr_month, arr_year;
+    public JSONArray requests_ids;
 
     // empty method for parcel just in case
     public TravelNotice() {
@@ -46,14 +47,14 @@ public class TravelNotice {
         // add the informations for filtering, a lot of which passed onto in arguments
         if (itemBools != null) {
             // if the booleans of items are not null then we populate the travel with these values in order
-            tvl.item_envelope = itemBools[0];
+            tvl.item_envelopes = itemBools[0];
             tvl.item_smbox = itemBools[1];
             tvl.item_lgbox = itemBools[2];
             tvl.item_clothing = itemBools[3];
             tvl.item_other = itemBools[4];
         } else {
             // set everything to true (assume traveler is okay with carrying anything) and set item_other to false and item_other_name to null
-            tvl.item_envelope = true;
+            tvl.item_envelopes = true;
             tvl.item_smbox = true;
             tvl.item_lgbox = true;
             tvl.item_clothing = true;
@@ -115,7 +116,7 @@ public class TravelNotice {
         params.put("airline", this.airline);
         params.put("flight_num", this.flight_num);
         // optional: 7 parameters
-        params.put("item_envelope", this.item_envelope);
+        params.put("item_envelopes", this.item_envelopes);
         params.put("item_smbox", this.item_smbox);
         params.put("item_lgbox", this.item_lgbox);
         params.put("item_clothing", this.item_clothing);
@@ -138,6 +139,7 @@ public class TravelNotice {
         params.put("arr_day", this.arr_day);
         params.put("arr_month", this.arr_month);
         params.put("arr_year", this.arr_year);
+        params.put("requests_ids", this.requests_ids);
         return params;
     }
 
@@ -153,16 +155,20 @@ public class TravelNotice {
 
         // add the informations for filtering, a lot of which passed onto in arguments
 
-        tvl.item_envelope = response.getBoolean("item_envelopes");
-        tvl.item_smbox = response.getBoolean("item_sbbox");
+        tvl.item_envelopes = response.getBoolean("item_envelopes");
+        tvl.item_smbox = response.getBoolean("item_smbox");
         tvl.item_lgbox = response.getBoolean("item_lgbox");
         tvl.item_clothing = response.getBoolean("item_clothing");
         tvl.item_other = response.getBoolean("item_other");
 
         // if the flexibilities are put, update flexibilities
-        tvl.drop_off_flexibility = response.getString("drop_off_flexibility");
-        tvl.pick_up_flexibility = response.getString("pick_up_flexibility");
-
+        try {
+            // we do a try catch since both these infor
+            tvl.drop_off_flexibility = response.getString("drop_off_flexibility");
+        } catch (JSONException e) { tvl.drop_off_flexibility = null; }
+        try {
+            tvl.pick_up_flexibility = response.getString("pick_up_flexibility");
+        } catch (JSONException e) {tvl.pick_up_flexibility = null; }
 
         // add the departure informations
         tvl.dep_iata = response.getString("dep_iata");
@@ -181,6 +187,8 @@ public class TravelNotice {
         tvl.arr_day = response.getInt("arr_day");
         tvl.arr_month = response.getInt("arr_month");
         tvl.arr_year = response.getInt("arr_year");
+
+        tvl.requests_ids = response.getJSONArray("requests_ids");
 
         // return the tvl
         return tvl;
