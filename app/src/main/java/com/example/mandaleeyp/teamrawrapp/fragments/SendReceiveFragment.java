@@ -1,6 +1,7 @@
 package com.example.mandaleeyp.teamrawrapp.fragments;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.mandaleeyp.teamrawrapp.R;
+import com.example.mandaleeyp.teamrawrapp.TripResultsActivity;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import java.text.SimpleDateFormat;
@@ -76,6 +78,9 @@ public class SendReceiveFragment extends Fragment {
         btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent i = new Intent(getContext(), TripResultsActivity.class);
+                getContext().startActivity(i);
 
             }
         });

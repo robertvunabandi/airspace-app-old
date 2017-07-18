@@ -54,12 +54,20 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        public TextView tvName;
         public TextView tvAirportCodes;
         public TextView tvFlightTime;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
+            tvName = (TextView) itemView.findViewById(R.id.tvName_itr);
+            tvAirportCodes = (TextView) itemView.findViewById(R.id.tvAirportCodes_itr);
+            tvFlightTime = (TextView) itemView.findViewById(R.id.tvFlightTime_itr);
+
+
+
+
         }
     }
 
