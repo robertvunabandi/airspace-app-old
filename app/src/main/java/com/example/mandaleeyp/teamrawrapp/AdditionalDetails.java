@@ -45,19 +45,19 @@ public class AdditionalDetails extends AppCompatActivity {
         // Check which checkbox was clicked
         switch (view.getId()) {
             case R.id.cb_envelope: {
-                    itemBools[0] = checked;
+                itemBools[0] = checked;
                 break;
             }
             case R.id.cb_smallBox: {
-                    itemBools[1] = checked;
+                itemBools[1] = checked;
                 break;
             }
             case R.id.cb_largeBox: {
-                    itemBools[2] = checked;
+                itemBools[2] = checked;
                 break;
             }
             case R.id.cb_clothing: {
-                    itemBools[3] = checked;
+                itemBools[3] = checked;
                 break;
             }
             case R.id.cb_other: {
