@@ -3,6 +3,7 @@ package com.example.mandaleeyp.teamrawrapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -17,12 +18,11 @@ public class AdditionalDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setTitle("Additional Details");
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_additional_details);
 
         // get the items in the XML
-//        et_other = (EditText) findViewById(R.id.et_other);
+        et_other = (EditText) findViewById(R.id.et_other);
         cb_envelope = (CheckBox) findViewById(R.id.cb_envelope);
         cb_smallBox = (CheckBox) findViewById(R.id.cb_smallBox);
         cb_largeBox = (CheckBox) findViewById(R.id.cb_largeBox);
@@ -60,7 +60,9 @@ public class AdditionalDetails extends AppCompatActivity {
                 if (checked) {
                     et_other.setVisibility(View.VISIBLE);
                 } else {
-                    et_other.setVisibility(View.GONE);
+                    // make it invisible and clear the text in it
+                    et_other.setVisibility(View.INVISIBLE);
+                    et_other.setText("");
                 }
                 break;
             }
