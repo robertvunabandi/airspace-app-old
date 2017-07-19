@@ -3,11 +3,11 @@ package com.example.mandaleeyp.teamrawrapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class RequestFormActivity extends AppCompatActivity {
+public class SenderFormActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request_form);
+        setContentView(R.layout.activity_sender_form);
     }
 }
