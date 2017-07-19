@@ -2,6 +2,7 @@ package com.example.mandaleeyp.teamrawrapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
@@ -153,7 +154,7 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
             btn_request_itr.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = getAdapterPosition();
+                    final int pos = getAdapterPosition();
                     // Intent i = new Intent(context, RequestActivity.class);
                     // context.startActivity(i);
                     // 1. Instantiate an AlertDialog.Builder with its constructor
@@ -164,6 +165,9 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
                     builder.setPositiveButton("sender", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             // User clicked OK button
+                            Intent i = new Intent(context, SenderRequestFormActivity.class);
+                            i.putExtra("id", trips.get(pos).id);
+                            context.startActivity(i);
                         }
                     });
                     builder.setNegativeButton("receiver", new DialogInterface.OnClickListener() {
