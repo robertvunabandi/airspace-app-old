@@ -165,14 +165,19 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
                     builder.setPositiveButton("sender", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             // User clicked OK button
-                            Intent i = new Intent(context, SenderRequestFormActivity.class);
-                            i.putExtra("id", trips.get(pos).id);
+                            Intent i = new Intent(context, SenderFormActivity.class);
+                            i.putExtra("trip_id", trips.get(pos).id);
+                            i.putExtra("sender_id", "596d0b5626bffc280b32187e");
                             context.startActivity(i);
                         }
                     });
                     builder.setNegativeButton("receiver", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             // User cancelled the dialog
+                            Intent i = new Intent(context, RecipientFormActivity.class);
+                            i.putExtra("trip_id", trips.get(pos).id);
+                            i.putExtra("recipient_id", "596d0b5626bffc280b32187e");
+                            context.startActivity(i);
                         }
                     });
 
