@@ -143,7 +143,6 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
             btn_request_itr = (Button) itemView.findViewById(R.id.btn_request_itr);
             btn_askQ_itr = (Button) itemView.findViewById(R.id.btn_askQ_itr);
 
-
             btn_request_itr.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
