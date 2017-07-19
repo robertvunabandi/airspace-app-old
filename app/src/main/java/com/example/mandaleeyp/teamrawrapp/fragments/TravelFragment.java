@@ -203,9 +203,9 @@ public class TravelFragment extends Fragment {
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             try {
                                 if (!response.getBoolean("error")){
-                                    TravelNotice tvl_updated = TravelNotice.fromJSONServer(response.getJSONObject("data"));
+                                    JSONObject tvl_json = response.getJSONObject("data");
                                     // in case of no error, do the additionalDetailsDialog(); method
-                                    additionalDetailsDialog(tvl_updated);
+                                    additionalDetailsDialog(tvl_json);
                                 } else {
                                     // get the error from the DB
                                     String error = response.getJSONObject("message").toString();
@@ -260,10 +260,10 @@ public class TravelFragment extends Fragment {
 
     }
 
-    public void additionalDetailsDialog(TravelNotice travelNotice){
+    public void additionalDetailsDialog(JSONObject travelNoticeJSON){
         Intent additionalDetailsDialog = new Intent(getContext(), AdditionalDetails.class);
         // Parcels.wrap parselizes the data, to get it from the additionalDetails, do Parcels.unwrap(data.getParcelableExtra("travel_notice"));
-        // additionalDetailsDialog.putExtra("travel_notice", Parcels.wrap(travelNotice)); // TODO - FIX Parcel because it causes an error right now
+         additionalDetailsDialog.putExtra("travel_notice_json", travelNoticeJSON.toString()); // TODO - FIX Parcel because it causes an error right now
         getContext().startActivity(additionalDetailsDialog);
     }
 
