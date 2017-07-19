@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +27,10 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
+
 public class TripsFragment extends Fragment {
 //    public final static String TAG = "TravelFragment";
-
 
     // Database url
     public final static String DB_HEROKU_URL = "http://mysterious-headland-54722.herokuapp.com";
@@ -82,8 +84,12 @@ public class TripsFragment extends Fragment {
                 TravelNotice travelNotice = TravelNotice.fromJSONServer(travelNoticeList.getJSONObject(i));
                 mTrips.add(travelNotice);
                 upcomingTripAdapter.notifyItemInserted(mTrips.size() - 1);
+//                Toast.makeText(getContext(), String.format("%s", travelNotice), Toast.LENGTH_LONG).show();
+
             } catch (JSONException e) {
+                Log.e(TAG, String.format("Error occured in JSON parsing"));
                 e.printStackTrace();
+                Toast.makeText(getContext(), String.format("%s", e), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -101,9 +107,10 @@ public class TripsFragment extends Fragment {
             // implement endpoint here
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                upcomingTripAdapter.clear();
+
                 try {
                     populateList(response.getJSONArray("data"));
-                    Toast.makeText(getContext(), String.format("%s", response), Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
             }
         }
