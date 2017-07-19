@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AdditionalDetails extends AppCompatActivity {
 
@@ -20,6 +21,9 @@ public class AdditionalDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_additional_details);
+        String tvl_string_json = getIntent().getStringExtra("travel_notice_json");
+        Toast.makeText(getBaseContext(), tvl_string_json, Toast.LENGTH_SHORT).show();
+        // JSONObject tvl = getIntent().getStringExtra("travel_notice");
 
         // get the items in the XML
         et_other = (EditText) findViewById(R.id.et_other);

@@ -36,17 +36,19 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
     @Override
     public void onBindViewHolder(UpcomingTripAdapter.ViewHolder holder, int position) {
         TravelNotice trips = mTrips.get(position);
-        holder.tv_from.setText(trips.dep_city);
-        holder.tv_to.setText(trips.arr_city);
-        holder.tv_dateFrom.setText(trips.dep_month + "/" + trips.dep_day + "/" + trips.dep_year);
-        holder.tv_dateTo.setText(trips.arr_month + "/" + trips.arr_day + "/" + trips.arr_year);
+        holder.tv_from.setText(trips.dep_iata);
+        holder.tv_to.setText(trips.arr_iata);
+        holder.tv_dateFrom.setText(trips.dep_month + "/" + trips.dep_day + "/" + String.valueOf(trips.dep_year).substring(2));
+        holder.tv_dateTo.setText(trips.arr_month + "/" + trips.arr_day + "/" + String.valueOf(trips.arr_year).substring(2));
         holder.tv_fromTime.setText(trips.dep_hour + ":" + trips.dep_min);
         holder.tv_toTime.setText(trips.arr_hour + ":" + trips.arr_min);
+        holder.tv_airlineCode.setText(trips.airline);
+        holder.tv_airlineNo.setText(trips.flight_num);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mTrips.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,10 +65,11 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
         public TextView tv_pendingTitle;
         public TextView tv_requestsNo;
         public TextView tv_pendingNo;
+        public TextView tv_airlineCode;
+        public TextView tv_airlineNo;
         public Button bt_edit;
         public Button bt_delete;
         public Button bt_detail;
-
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -83,6 +86,8 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
             tv_pendingTitle = (TextView) itemView.findViewById(R.id.tv_pendingTitle);
             tv_requestsNo = (TextView) itemView.findViewById(R.id.tv_requestNo);
             tv_pendingNo = (TextView) itemView.findViewById(R.id.tv_pendingNo);
+            tv_airlineCode = (TextView) itemView.findViewById(R.id.tv_airlineCode);
+            tv_airlineNo = (TextView) itemView.findViewById(R.id.tv_airlineNo);
             bt_edit = (Button) itemView.findViewById(R.id.bt_edit);
             bt_delete = (Button) itemView.findViewById(R.id.bt_delete);
             bt_detail = (Button) itemView.findViewById(R.id.bt_detail);
