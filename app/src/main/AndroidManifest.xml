@@ -23,7 +23,8 @@
             android:name=".AdditionalDetails"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity android:name=".TripResultsActivity" />
-        <activity android:name=".RequestFormActivity"></activity>
+        <activity android:name=".SenderFormActivity" />
+        <activity android:name=".RecipientFormActivity"></activity>
     </application>
 
 </manifest>
