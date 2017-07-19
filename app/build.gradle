@@ -35,4 +35,9 @@ dependencies {
     compile 'com.github.aakira:expandable-layout:1.4.2@aar'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'org.parceler:parceler:1.1.6'
+<<<<<<< HEAD
+=======
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.github.aakira:expandable-layout:1.4.2@aar'
+>>>>>>> 925aec517de3c3fdcaeca9fb2443da40eabe5331
 }

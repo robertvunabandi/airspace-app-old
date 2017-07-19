@@ -1,8 +1,10 @@
 package com.example.mandaleeyp.teamrawrapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +31,9 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
     Context context;
 
 
-
-    public TripResultAdapter(List<TravelNotice> theTrips) {trips = theTrips;}
+    public TripResultAdapter(List<TravelNotice> theTrips) {
+        trips = theTrips;
+    }
 
 
     @Override
@@ -43,8 +46,6 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
         };
         return viewHolder;
     }
-
-
 
 
     @Override
@@ -91,7 +92,9 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
     }
 
     @Override
-    public int getItemCount() {return trips.size();}
+    public int getItemCount() {
+        return trips.size();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -153,6 +156,25 @@ public class TripResultAdapter extends RecyclerView.Adapter<TripResultAdapter.Vi
                     int pos = getAdapterPosition();
                     // Intent i = new Intent(context, RequestActivity.class);
                     // context.startActivity(i);
+                    // 1. Instantiate an AlertDialog.Builder with its constructor
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Are you a")
+                            .setTitle(R.string.dialog_title);
+
+                    builder.setPositiveButton("sender", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User clicked OK button
+                        }
+                    });
+                    builder.setNegativeButton("receiver", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
                 }
             });
 
