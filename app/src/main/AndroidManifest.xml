@@ -20,9 +20,8 @@
         </activity>
         <activity android:name=".AirportSearchActivity" />
         <activity
-            android:name=".AdditionalDetails"
-            android:theme="@style/Theme.AppCompat.Light.Dialog" />
-        <activity android:name=".TripResultsActivity"></activity>
+            android:name=".AdditionalDetails" />
+        <activity android:name=".TripResultsActivity" />
     </application>
 
 </manifest>

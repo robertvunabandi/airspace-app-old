@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -44,9 +45,9 @@ public class TravelFragment extends Fragment {
     public final static String APP_KEY_PARAM = "appKey";
     public final static String APP_ID_PARAM = "appId";
     // our database url
-    public final static String DB_HEROKU_URL = "http://mysterious-headland-54722.herokuapp.com";
-    public final static String DB_LOCAL_URL = "http://172.22.11.86:3000";
-    public final static String[] DB_URLS = {DB_HEROKU_URL, DB_LOCAL_URL};
+    public String[] DB_URLS;
+    // code for on activity result
+    public static final int ADDITIONAL_DETAILS_CODE = 1;
 
     private int flightYear;
     private int flightMonth;
@@ -74,7 +75,6 @@ public class TravelFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         client = new AsyncHttpClient();
 
     }
@@ -89,6 +89,8 @@ public class TravelFragment extends Fragment {
         btnSubmit = (Button) v.findViewById(R.id.bt_submit);
         final EditText airlineCode = (EditText) v.findViewById(R.id.til_airlineCode);
         final EditText flightNumber = (EditText) v.findViewById(R.id.til_flightNumber);
+        DB_URLS = new String[] {getString(R.string.DB_HEROKU_URL), getString(R.string.DB_LOCAL_URL)};
+
 
         airlinecodeWrapper.setHint("Airline code");
         flightnumberWrapper.setHint("Flight number");
@@ -148,26 +150,26 @@ public class TravelFragment extends Fragment {
                             // Log.d(TAG, String.format("%s", response)); // debugging to see response
                             processResponse(response);
                         } catch (JSONException e) {
-                            Toast.makeText(getContext(), String.format("JSON Parsing of response from flight API failed"), Toast.LENGTH_SHORT).show();
+                            Snackbar.make(getView(), String.format("An error occurred while parsing the JSON response from the flight API. "), Snackbar.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         Log.e(TAG, String.format("error 1: %s", errorResponse));
-                        Toast.makeText(getContext(), String.format("error 1 %s", errorResponse), Toast.LENGTH_LONG).show();
+                        Snackbar.make(getView(), String.format("An error (1) occurred"), Snackbar.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                         Log.e(TAG, String.format("error 2: %s", errorResponse));
-                        Toast.makeText(getContext(), String.format("error 2 %s", errorResponse), Toast.LENGTH_LONG).show();
+                        Snackbar.make(getView(), String.format("An error (2) occurred"), Snackbar.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         Log.e(TAG, String.format("error 3: %s", responseString));
-                        Toast.makeText(getContext(), String.format("error 3 %s", responseString), Toast.LENGTH_LONG).show();
+                        Snackbar.make(getView(), String.format("An error (3) occurred"), Snackbar.LENGTH_LONG).show();
                     }
                 });
             }
@@ -203,9 +205,8 @@ public class TravelFragment extends Fragment {
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             try {
                                 if (!response.getBoolean("error")){
-                                    JSONObject tvl_json = response.getJSONObject("data");
-                                    // in case of no error, do the additionalDetailsDialog(); method
-                                    additionalDetailsDialog(tvl_json);
+                                    // in case of no error, pop up the addDetailsDialog that asks the user if they want to add more details
+                                    addDetailsDialog(response.getJSONObject("data").getString("_id"), response.getJSONObject("data").getString("tuid"));
                                 } else {
                                     // get the error from the DB
                                     String error = response.getJSONObject("message").toString();
@@ -260,11 +261,30 @@ public class TravelFragment extends Fragment {
 
     }
 
-    public void additionalDetailsDialog(JSONObject travelNoticeJSON){
-        Intent additionalDetailsDialog = new Intent(getContext(), AdditionalDetails.class);
-        // Parcels.wrap parselizes the data, to get it from the additionalDetails, do Parcels.unwrap(data.getParcelableExtra("travel_notice"));
-         additionalDetailsDialog.putExtra("travel_notice_json", travelNoticeJSON.toString()); // TODO - FIX Parcel because it causes an error right now
-        getContext().startActivity(additionalDetailsDialog);
+    public void addDetailsDialog(final String travelNoticeId, final String tuid) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Would you like to add details to your travel notice?")
+                .setTitle("Add more details");
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                additionalDetailsActivityLaunch(travelNoticeId, tuid);
+            }
+        });
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // TODO - Take the user to the upcoming section, which should be updated with all of this user's travel notices
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void additionalDetailsActivityLaunch(String travelNoticeId, String tuid){
+        Intent AdditionalDetailsActivity = new Intent(getContext(), AdditionalDetails.class);
+        AdditionalDetailsActivity.putExtra("tuid", tuid);
+        AdditionalDetailsActivity.putExtra("travel_notice_id", travelNoticeId);
+        getActivity().startActivityForResult(AdditionalDetailsActivity, ADDITIONAL_DETAILS_CODE);
     }
 
 }

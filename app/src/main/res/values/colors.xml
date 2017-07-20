@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- PRIMARY COLORS -->
+    <color name="PXXLight">#d1d5fa</color>
+    <color name="PXLight">#bac1f8</color>
     <color name="PLight">#8e99f3</color>
     <color name="PRegular">#5c6bc0</color>
     <color name="PDark">#26418f</color>
@@ -14,5 +16,7 @@
     <!-- WHITE COLOR FOR TEXTS -->
     <color name="White">#fff</color>
     <!-- POTENTIAL FOR ACCENTS -->
+    <color name="Red">#ff2528</color>
+    <color name="RedTransparent">#AAff2528</color>
     <color name="PotentialAccent">#00e676</color>
 </resources>

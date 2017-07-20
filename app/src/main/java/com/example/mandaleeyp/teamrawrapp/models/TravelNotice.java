@@ -14,6 +14,7 @@ import org.json.JSONObject;
 public class TravelNotice {
     // required: 3
     public String id, tuid, airline, flight_num;
+    public String airlineName; // TODO - Incorporate also this
     // optional: 6
     public Boolean item_envelopes, item_smbox, item_lgbox, item_clothing, item_other;
     public String drop_off_flexibility, pick_up_flexibility;
@@ -23,6 +24,11 @@ public class TravelNotice {
     public String arr_iata, arr_city;
     public int arr_min, arr_hour, arr_day, arr_month, arr_year;
     public JSONArray requests_ids;
+
+    // for verbose method of dates
+    public String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+
+    public final static String TAG = "TravelNoticeModel";
 
     // empty method for parcel just in case
     public TravelNotice() {
@@ -138,6 +144,50 @@ public class TravelNotice {
         params.put("arr_year", this.arr_year);
         params.put("requests_ids", this.requests_ids);
         return params;
+    }
+
+    /* Returns a boolean whether the flight is overnight or not */
+    public boolean isOvernight(){
+        // Unless a flight took a legit 30 days, the departure day and arrival day will be different if the flight is overnight
+        return this.arr_day != this.dep_day;
+    }
+    public String getDepartureDaySimple(){
+        // returns the depature date in simple format, e.g.: 08/12/17
+        String month = this.dep_month < 10 ? "0"+Integer.toString(this.dep_month) : Integer.toString(this.dep_month);
+        String day = this.dep_day < 10 ? "0"+Integer.toString(this.dep_day) : Integer.toString(this.dep_day);
+        String year = Integer.toString(this.dep_year).substring(2);  // gives just 17 instead of 2017 for example
+        return month + "/" + day + "/" + year;
+    }
+    public String getArrivalDaySimple(){
+        // returns the arrival date in simple format, e.g.: 08/12/17
+        String month = this.arr_month < 10 ? "0"+Integer.toString(this.arr_month) : Integer.toString(this.arr_month);
+        String day = this.arr_day < 10 ? "0"+Integer.toString(this.arr_day) : Integer.toString(this.arr_day);
+        String year = Integer.toString(this.arr_year).substring(2); // gives just 17 instead of 2017 for example
+        return month + "/" + day + "/" + year;
+    }
+    public String getDepartureDayVerbose(){
+        // returns the departure date in a verbose format, e.g.: August 12, 2017
+        return months[this.dep_month - 1] + " "+Integer.toString(this.dep_day)+", "+ Integer.toString(this.dep_year);
+    }
+    public String getArrivalDayVerbose(){
+        // returns the arrival date in a verbose format, e.g.: August 12, 2017
+        return months[this.arr_month - 1] + " "+Integer.toString(this.arr_day)+", "+ Integer.toString(this.arr_year);
+    }
+    public String getDepartureTime(){
+        // return the time like 12:00 PM
+        int hour = this.dep_hour > 12 ? this.dep_hour - 12 : this.dep_hour;
+        String finalHour = hour < 10 ? "0"+Integer.toString(hour) : Integer.toString(hour);
+        String finalMin = this.dep_min < 10 ? "0"+Integer.toString(this.dep_min) : Integer.toString(this.dep_min);
+        String ampm = this.dep_hour >= 12 ? "PM" : "AM";
+        return finalHour+":"+finalMin+" "+ampm;
+    }
+    public String getArrivalTime(){
+        // return the time like 12:00 PM
+        int hour = this.arr_hour > 12 ? this.arr_hour - 12 : this.arr_hour;
+        String finalHour = hour < 10 ? "0"+Integer.toString(hour) : Integer.toString(hour);
+        String finalMin = this.arr_min < 10 ? "0"+Integer.toString(this.arr_min) : Integer.toString(this.arr_min);
+        String ampm = this.arr_hour >= 12 ? "PM" : "AM";
+        return finalHour+":"+finalMin+" "+ampm;
     }
 
     public static TravelNotice fromJSONServer(JSONObject response) throws JSONException {
