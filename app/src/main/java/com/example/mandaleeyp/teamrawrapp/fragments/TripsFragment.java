@@ -30,7 +30,7 @@ import cz.msebera.android.httpclient.Header;
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 public class TripsFragment extends Fragment {
-//    public final static String TAG = "TravelFragment";
+    // public final static String TAG = "TravelFragment";
 
     // Database url
     public final static String DB_HEROKU_URL = "http://mysterious-headland-54722.herokuapp.com";

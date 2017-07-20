@@ -22,6 +22,8 @@
         <activity
             android:name=".AdditionalDetails" />
         <activity android:name=".TripResultsActivity" />
+        <activity android:name=".SenderFormActivity" />
+        <activity android:name=".RecipientFormActivity"></activity>
     </application>
 
 </manifest>
