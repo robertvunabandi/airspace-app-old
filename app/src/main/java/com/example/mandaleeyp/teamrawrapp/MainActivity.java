@@ -38,8 +38,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == ADDITIONAL_DETAILS_CODE) {
+            // if no error occurred we say TN has been saved successfully
             vpPager.setCurrentItem(4);
             Snackbar.make(parentLayout, String.format("Your travel notice has been saved successfully!"), Snackbar.LENGTH_LONG).show();
+        } else if (resultCode == RESULT_CANCELED && requestCode == ADDITIONAL_DETAILS_CODE) {
+            // if an error occurred then we snackbar this
+            vpPager.setCurrentItem(4);
+            Snackbar.make(parentLayout, String.format("O no! An error occurred! However, your travel notice has been saved without additional details. You can modify it here."), Snackbar.LENGTH_LONG).show();
         }
     }
 }

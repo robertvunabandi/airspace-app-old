@@ -207,7 +207,7 @@ public class AdditionalDetails extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Snackbar.make(parentLayout, String.format("An error occured while parsing the JSON response to get the travel notice from server."), Snackbar.LENGTH_LONG).show();
-                    finish();
+                    setResult(RESULT_CANCELED); finish();
                 }
             }
 
@@ -220,21 +220,21 @@ public class AdditionalDetails extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.e(TAG, String.format("Error (1) occured %s", errorResponse));
                 Snackbar.make(parentLayout, String.format("Error (1) occurred"), Snackbar.LENGTH_LONG).show();
-                finish();
+                setResult(RESULT_CANCELED); finish();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 Log.e(TAG, String.format("Error (2) occured %s", errorResponse));
                 Snackbar.make(parentLayout, String.format("Error (2) occurred"), Snackbar.LENGTH_LONG).show();
-                finish();
+                setResult(RESULT_CANCELED); finish();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.e(TAG, String.format("Error (3) occured %s", responseString));
                 Snackbar.make(parentLayout, String.format("Error (3) occurred"), Snackbar.LENGTH_LONG).show();
-                finish();
+                setResult(RESULT_CANCELED); finish();
             }
         });
     }
@@ -257,19 +257,21 @@ public class AdditionalDetails extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.e(TAG, String.format("Error (1) occured %s", errorResponse));
-                setResult(RESULT_OK); finish();
+                setResult(RESULT_CANCELED); finish();
                 Snackbar.make(parentLayout, String.format("Error (1) occurred, However, your travel has been saved without additional details."), Snackbar.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 Log.e(TAG, String.format("Error (2) occured %s", errorResponse));
+                setResult(RESULT_CANCELED); finish();
                 Snackbar.make(parentLayout, String.format("Error (2) occurred, However, your travel has been saved without additional details."), Snackbar.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.e(TAG, String.format("Error (3) occured %s", responseString));
+                setResult(RESULT_CANCELED); finish();
                 Snackbar.make(parentLayout, String.format("Error (3) occurred, However, your travel has been saved without additional details."), Snackbar.LENGTH_LONG).show();
             }
         });
