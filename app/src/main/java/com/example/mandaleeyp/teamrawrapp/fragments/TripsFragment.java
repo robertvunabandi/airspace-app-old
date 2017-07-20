@@ -47,13 +47,6 @@ public class TripsFragment extends Fragment {
     public TripsFragment() {
     }
 
-    public static TripsFragment newInstance(String param1, String param2) {
-        TripsFragment fragment = new TripsFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,15 +1,27 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/SXXDark"
     tools:context="com.example.mandaleeyp.teamrawrapp.fragments.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/White"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:srcCompat="@color/PLight"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_profile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="jhkhkhkjh"
+        android:textColor="@android:color/holo_blue_light" />
+</RelativeLayout>

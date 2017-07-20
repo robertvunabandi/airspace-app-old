@@ -179,7 +179,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/rl_flexiblityDropoffInit"
-                android:text="How will you get the item/s to the reciepent?"
+                android:text="How will you get the item/s to the recipient?"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="18sp" />
 
